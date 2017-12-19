@@ -1,0 +1,29 @@
+version: 0.1
+
+
+phases:
+  install:
+    commands:
+      - pip install --upgrade pip
+      - pip install pipenv
+  pre_build:
+    commands:
+      - pipenv shell
+      - pipenv --python 3.6.1
+      - pipenv install
+      - mkdir -p build
+      - cp -r $VIRTUAL_ENV/lib/python3.6/site-packages/* build/
+      - cp -r utils build/
+      - cp -r pipeline_lambda build/
+  build:
+    commands:
+      - echo "Package lambda"
+      - cd build
+      - zip -r pipeline_lambda.zip *
+
+
+artifacts:
+  files:
+    - pipeline_lambda.zip
+  discard-paths: yes
+  base-directory: build

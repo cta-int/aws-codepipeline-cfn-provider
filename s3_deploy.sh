@@ -1,7 +1,12 @@
-BUCKET_NAME="aws-codepipeline-cfn-provider-bucket"
-BUCKET_KEY="pipeline_lambda.zip"
+#!/usr/bin/env bash
 
-mkdir build
+set -eux
+BUCKET_KEY=${1-$FILE_NAME}
+BUCKET_NAME=${2-$BUCKET}
+pipenv shell
+pipenv --python 3.6.1
+pipenv install
+mkdir -p build
 cp -r $VIRTUAL_ENV/lib/python3.6/site-packages/* build/
 cp -r utils build/
 cp -r pipeline_lambda build/
