@@ -9,7 +9,7 @@ phases:
   pre_build:
     commands:
       - pipenv shell
-      - pipenv --python 3.6.1
+      - pipenv --python 3.6
       - pipenv install
       - mkdir -p build
       - cp -r $VIRTUAL_ENV/lib/python3.6/site-packages/* build/
