@@ -1,5 +1,5 @@
 from troposphere import (
-    Template, iam, GetAtt, Join, Ref, logs, Select, Export, Output, Parameter, awslambda, Base64, ImportValue, Sub
+    Template, iam, GetAtt, Join, Ref, logs, Select, Export, Output, Parameter, awslambda, Base64, ImportValue, Sub, s3
 )
 from awacs.aws import Policy, Allow, Statement, Principal, Action
 
@@ -16,6 +16,8 @@ lambda_package = t.add_parameter(Parameter(
     Type="String",
     Description="Location of the zip"
 ))
+
+template_bucket = t.add_resource(s3.Bucket("TemplateBucket"))
 
 # Create loggroup
 log_group = t.add_resource(logs.LogGroup(
@@ -60,6 +62,13 @@ lambda_role = t.add_resource(iam.Role(
                     Statement(
                         Effect=Allow,
                         Action=[
+                            Action("s3", "*"),
+                        ],
+                        Resource=["*"]
+                    ),
+                    Statement(
+                        Effect=Allow,
+                        Action=[
                             Action("codepipeline", "PutJobSuccessResult"),
                             Action("codepipeline", "PutJobFailureResult"),
                         ],
@@ -84,6 +93,12 @@ cfn_lambda = t.add_resource(awslambda.Function(
     Runtime="python3.6",
     Timeout=300,
     MemorySize=1536,
+    Environment=awslambda.Environment(
+        Variables={
+            'PIPELINE_TEMPLATES_BUCKET': Ref(template_bucket),
+        }
+    )
+
 ))
 
 t.add_output(Output(
