@@ -56,7 +56,15 @@ lambda_role = t.add_resource(iam.Role(
                             Action("cloudformation", "*"),
                         ],
                         Resource=["*"]
-                    )
+                    ),
+                    Statement(
+                        Effect=Allow,
+                        Action=[
+                            Action("codepipeline", "PutJobSuccessResult"),
+                            Action("codepipeline", "PutJobFailureResult"),
+                        ],
+                        Resource=["*"]
+                    ),
                 ],
             )
         )
