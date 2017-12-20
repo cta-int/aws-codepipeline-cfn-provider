@@ -8,9 +8,9 @@ phases:
     commands:
       - pip install --upgrade pip
       - pip install pipenv
+      - apt-get -y install zip
   pre_build:
     commands:
-      - echo "venv $VIRTUAL_ENV"
       - pipenv --python 3.3.6
       - pipenv install
       - mkdir -p build
