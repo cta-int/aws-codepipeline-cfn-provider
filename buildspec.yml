@@ -16,7 +16,7 @@ phases:
       - VIRTUAL_ENV=$(pipenv --venv)
       - cp -r $VIRTUAL_ENV/lib/python3.3/site-packages/* build/
       - cp -r utils build/
-      - cp -r pipeline_lambda build/
+      - cp -r pipeline_lambda/pipeline_lambda.py build/index.py
 
 artifacts:
   files:
