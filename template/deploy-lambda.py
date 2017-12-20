@@ -73,7 +73,7 @@ cfn_lambda = t.add_resource(awslambda.Function(
     Handler="index.handler",
     FunctionName=Join("-", ["lambda", Ref("AWS::StackName")]),
     Role=GetAtt(lambda_role, "Arn"),
-    Runtime="python3.3",
+    Runtime="python3.6",
     Timeout=300,
     MemorySize=1536,
 ))
