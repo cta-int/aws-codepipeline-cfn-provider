@@ -8,7 +8,7 @@ phases:
     commands:
       - pip install --upgrade pip
       - pip install pipenv
-      - apt-get -y install zip
+      - apt-get update && apt-get -y install zip && apt-get clean
   pre_build:
     commands:
       - pipenv --python 3.3.6
