@@ -13,9 +13,10 @@ lambda_bucket = t.add_parameter(Parameter(
 
 lambda_package = t.add_parameter(Parameter(
     "LambdaPackage",
-    Type="CommaDelimitedList",
+    Type="String",
     Description="Location of the zip"
 ))
+
 # Create loggroup
 log_group = t.add_resource(logs.LogGroup(
     "LogGroup",
