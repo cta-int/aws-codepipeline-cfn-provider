@@ -57,7 +57,7 @@ def generate_template_and_config(s3, cf, job_id, params: PipelineUserParameters,
     else:
         config = None
 
-    template_url = put_template_into_s3(job_id, params.TemplateFile, json.dumps(template))
+    template_url = put_template_into_s3(job_id, params.TemplateFile, json.dumps(template, indent=4, separators=(',', ': '), sort_keys=True))
     update = stack_exists(cf, params.StackName)
     config = PipelineStackConfig(config, template,
                                  parse_override_params(s3, params.ParameterOverrides, in_artifacts),
