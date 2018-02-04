@@ -33,6 +33,7 @@ class PipelineUserParameters:
         self.ConfigArtifact = None
         self.Region = lambda_ctx.invoked_function_arn.split(':')[3]
         self.Region = os.environ["AWS_REGION"]
+        self.Region = os.environ["AWS_DEFAULT_REGION"]
         self.AccountId = lambda_ctx.invoked_function_arn.split(':')[4]
         try:
             user_parameters = job_data['actionConfiguration']['configuration']['UserParameters']
@@ -127,7 +128,7 @@ class PipelineArtifact:
         self.revision = artifact.get('revision')
         self.files = {}
         self.url = "https://s3-{}.amazonaws.com/{}/{}".format(
-            region,
+            os.environ["AWS_REGION"],
             self.location['s3Location']['bucketName'],
             self.location['s3Location']['objectKey']
         )
