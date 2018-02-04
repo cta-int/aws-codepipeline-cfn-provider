@@ -1,7 +1,7 @@
 import json
 import tempfile
 import zipfile
-
+import os
 import boto3
 
 from utils.aws_utils import file_to_dict
@@ -32,6 +32,7 @@ class PipelineUserParameters:
         self.ConfigFile = None
         self.ConfigArtifact = None
         self.Region = lambda_ctx.invoked_function_arn.split(':')[3]
+        self.Region = os.environ["AWS_REGION"]
         self.AccountId = lambda_ctx.invoked_function_arn.split(':')[4]
         try:
             user_parameters = job_data['actionConfiguration']['configuration']['UserParameters']
