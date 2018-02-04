@@ -65,7 +65,7 @@ def put_template_into_s3(job_id, file_name, template):
     """
     client = boto3.client('s3')
     bucket = os.environ.get('PIPELINE_TEMPLATES_BUCKET')
-    key = "{}/{}.json".format(job_id, file_name)
+    key = "{}/{}".format(job_id, file_name)
     client.put_object(Bucket=bucket, Key=key, Body=template)
     region = client.get_bucket_location(Bucket=bucket)['LocationConstraint']
     return "https://s3.{}.amazonaws.com/{}/{}".format(region, bucket, key)
