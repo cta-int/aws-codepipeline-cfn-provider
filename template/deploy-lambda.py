@@ -96,6 +96,7 @@ cfn_lambda = t.add_resource(awslambda.Function(
     Environment=awslambda.Environment(
         Variables={
             'PIPELINE_TEMPLATES_BUCKET': Ref(template_bucket),
+            'REGION' : Ref("AWS::Region")
         }
     )
 
