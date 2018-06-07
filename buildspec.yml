@@ -10,11 +10,11 @@ phases:
       - pip install pipenv
   build:
     commands:
-      - pipenv --python 3.3.6
+      - pipenv --python 3.6
       - pipenv install
       - mkdir -p build
       - VIRTUAL_ENV=$(pipenv --venv)
-      - cp -r $VIRTUAL_ENV/lib/python3.3/site-packages/* build/
+      - cp -r $VIRTUAL_ENV/lib/python3.6/site-packages/* build/
       - cp -r utils build/
       - cp -r pipeline_lambda/pipeline_lambda.py build/index.py
       - cp template/deploy-lambda.py build/
