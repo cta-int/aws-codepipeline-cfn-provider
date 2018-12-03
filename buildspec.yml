@@ -10,6 +10,8 @@ phases:
       - pip install pipenv
   build:
     commands:
+      - pip --version #test
+      - pipenv --version #test
       - pipenv --python 3.6
       - pipenv install
       - mkdir -p build
